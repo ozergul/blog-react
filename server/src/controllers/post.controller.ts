@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import { Term } from "../entity/term";
 import { Post } from "../entity/post";
 import * as helpers from "../utils/helpers";
-import * as marked from "marked";
+import * as showdown   from "showdown";
+const converter = new showdown.Converter(),
 
 export class PostController {
     constructor() {}
@@ -85,7 +86,6 @@ export class PostController {
             let termsWillBeAdd:Term[] = [];
             try {
                 if(categories) {
-                    console.log("categories", categories)
                     for(let categoryID of categories){
                         await Term.findOne({id: categoryID}).then(async (fetchCategory)=>{
                             if(fetchCategory){
@@ -105,7 +105,6 @@ export class PostController {
 
             try {
                 if(tags) {
-                    console.log("tags", tags)
                     for(let tag of tags){
                         let term = tag.value;
                         let tagSlug = helpers.toSeoUrl(term);
@@ -117,7 +116,6 @@ export class PostController {
                             } else {
                                 const newTag = await Term.create(tagTermObj);
                                 await newTag.save();
-                                console.log("newTag", newTag)
                                 termsWillBeAdd.push(newTag);
                             }
                         })
@@ -169,7 +167,6 @@ export class PostController {
                 let termsWillBeAdd:Term[] = [];
                 try {
                     if(categories) {
-                        console.log("categories", categories)
                         for(let categoryID of categories){
                             await Term.findOne({id: categoryID}).then(async (fetchCategory)=>{
                                 if(fetchCategory){
@@ -191,7 +188,6 @@ export class PostController {
 
                 try {
                     if(tags) {
-                        console.log("tags", tags)
                         for(let tag of tags){
                             let term = tag.value;
                             let tagSlug = helpers.toSeoUrl(term);
@@ -203,7 +199,6 @@ export class PostController {
                                 } else {
                                     const newTag = await Term.create(tagTermObj);
                                     await newTag.save();
-                                    console.log("newTag", newTag)
                                     termsWillBeAdd.push(newTag);
                                 }
                             })
@@ -218,64 +213,6 @@ export class PostController {
             } else {
                 res.json({success: false, message: `This post id is not found: ${id}`})
             }
-            // const newPost = Post.create({
-            //     title: title, 
-            //     content: content, 
-            //     userId: userId, 
-            //     status: status,
-            //     terms: []
-            // })
-
-            /**
-             * insert categories
-             
-            let termsWillBeAdd:Term[] = [];
-            try {
-                if(categories) {
-                    console.log("categories", categories)
-                    for(let categoryID of categories){
-                        await Term.findOne({id: categoryID}).then((fetchCategory)=>{
-                            if(fetchCategory){
-                                termsWillBeAdd.push(fetchCategory);
-                            }
-                        })
-                    }
-                }
-                newPost.terms = termsWillBeAdd;
-            } catch(err) {
-                console.log(err);
-                res.json({success: false, message: "Error occured when adding category"});
-            }
-            /**
-             * insert tags
-            
-
-            try {
-                if(tags) {
-                    console.log("tags", tags)
-                    for(let tag of tags){
-                        let term = tag.value;
-                        let tagSlug = helpers.toSeoUrl(term);
-                        let tagTermObj = {term: term, slug: tagSlug, type: "tags"}
-                        
-                        await Term.findOne({slug: tagSlug, type: "tags"}).then((fetchTag)=>{
-                            if(fetchTag){
-                                termsWillBeAdd.push(fetchTag);
-                            } else {
-                                const newTag = Term.create(tagTermObj);
-                                newTag.save();
-                                console.log("newTag", newTag)
-                                termsWillBeAdd.push(newTag);
-                            }
-                        })
-                    }
-                }
-                newPost.terms = termsWillBeAdd;
-            } catch(err) {
-                res.json({success: false, message: "Error occured when adding tag"});
-            }
-            await newPost.save();
-             */
 
             res.json({success: true});
 
@@ -442,8 +379,7 @@ export class PostController {
                 newPost.updatedAt = updatedAt;
                 newPost.slug = slug;
                 newPost.postType = postType;
-                newPost.content = marked(content);
-                
+                newPost.content = converter.makeHtml(content);
 
                 newPost.categories = tempTerms.filter(t => t.type == "categories")
                 newPost.tags = tempTerms.filter(t => t.type == "tags")

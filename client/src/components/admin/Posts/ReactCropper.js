@@ -48,7 +48,7 @@ class ReactImageCropper extends Component {
     }
 
     render() {
-        let {file, i, removeImage} = this.props;
+        let {file, i} = this.props;
         let {uploaded} = this.state;
 
         return (
@@ -56,7 +56,9 @@ class ReactImageCropper extends Component {
             <div className="image-item">
                 <div className="image-top">
                     <span className="image-name">{file.name}</span>
-                    <span className="btn btn-danger remove-image-button" onClick={this.removeImage}>x</span>
+                    {!uploaded && 
+                        <span className="btn btn-danger remove-image-button" onClick={this.removeImage}>x</span>
+                    }
                 </div>
             
                 <ReactCropper

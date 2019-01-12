@@ -1,3 +1,5 @@
+@import "reset.scss";
+
 body {
     margin: 0;
     padding: 0;
@@ -6,12 +8,12 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: #333;
 }
 
 .blog {
     
 }
-
 
 .login-form {
     width: 500px; margin: auto; margin-top: 200px;
@@ -24,38 +26,78 @@ body {
     }
 }
 
-
-.body {
-    width: 800px; margin: 0 auto;
+a {
+    color: #0001FF; text-decoration: none;
+    &[target="_blank"]:after {
+        content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+        margin: 0 3px 0 5px;
+    }
+    &:hover {
+        border-bottom: 2px solid #0001FF;
+    }
+    &[target="_blank"]:visited {
+        color: #8a01ff;
+    }
 }
 
 
+
+
+.body {
+
+}
+
+.centered {
+    width: 800px; margin: 0 auto;
+}
+
 header {
-    height: 200px; display: flex; justify-content: center; align-items: center; background: #e74c3c; margin-bottom: 30px;
+    height: 150px; margin-bottom: 30px;
+    background: #efefef;
+
+    .centered {
+        display: flex; align-items: center; height: 100%;
+    }
+    .logo {
+        a {
+            font-size: 30px; font-weight: bold; color: #000;
+        }
+    }
+
     ul {
-        list-style: none; margin: 0; padding: 0; display: flex; justify-content: center;
+        margin-left: auto;
         li {
-            margin: 0 20px;
-            a {
-                color: #fff; font-size: 20px;
-                &:hover {color: #fff;}
-            }
+            font-size: 20px; float: left; margin-left: 20px;
         }
     }
 }
 
 
 .posts {
-
     .post {
         margin-bottom: 30px;
 
-        .info {
-            margin-bottom: 10px; color: #999;
+        h2.title {
+            font-size: 40px; line-height: 55px; font-weight: 400; margin-bottom: 20px;
+            a {color: rgba(0,0,0,.84);}
         }
+        .info {color: #666;}
     }
 }
 
 
+.styled-text {
+    font-size: 19px; line-height: 25px; color: #111;
+
+    img {
+        max-width: calc(100% + 200px); 
+        margin-left: -100px; margin-right: -100px; margin-bottom: 20px; margin-top: 20px;
+        display: block;
+    }
+
+    p {
+        margin-bottom: 20px;
+    }
+}
 
 

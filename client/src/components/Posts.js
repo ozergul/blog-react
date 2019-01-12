@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 import "../assets/blog.scss";
 
+import hljs from 'highlight.js/lib/highlight';
+import 'highlight.js/styles/github.css'
 
 class Posts extends Component {
 
@@ -49,6 +51,7 @@ class Posts extends Component {
     render() {
         return (
             <div className="posts">
+                <div className="centered">
                 {
                     this.state.posts.map( (post, index) => 
                         <div key={index} className="post">
@@ -57,19 +60,18 @@ class Posts extends Component {
                                 {moment(post.createdAt).fromNow()}
                             </div>
 
-                            <h2>
-                            <Link to={ "/" + post.slug}>{post.title}</Link>
+                            <h2 className="title">
+                                <Link to={ "/" + post.slug}>{post.title}</Link>
                             </h2>
 
-                            <div className="post-excerpt">
+                            <div className="post-excerpt styled-text">
                                 <div dangerouslySetInnerHTML={{__html: post.content}}></div>
                             </div>
-
                         </div>
                     )
                 }
                 
-                <nav aria-label="Pagination">
+                    <nav aria-label="Pagination">
                         <ul className="pagination">
                         {!isNaN(this.state.pages) && [...Array(this.state.pages)].map( (post, index) => 
                             <li className="page-item" key={index}>
@@ -80,7 +82,7 @@ class Posts extends Component {
                         )}
                         </ul>
                     </nav>
-                
+                </div>
             </div>
         );
     }

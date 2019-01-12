@@ -8,7 +8,7 @@ import {
     ManyToMany,
     JoinTable,
     BeforeInsert,
-    BeforeUpdate
+    BeforeUpdate,
 } from 'typeorm'
 
 import {Term} from "./term"
@@ -21,7 +21,7 @@ export class Post extends BaseEntity {
 
     @Column() title: string
     @Column() slug: string
-    @Column() content: string
+    @Column({type: "longtext"}) content: string
     @Column() userId: number
     @Column() postType: number
     @Column() status: number

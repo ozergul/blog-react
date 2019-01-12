@@ -4,7 +4,7 @@ import HomePage from './components/HomePage'
 import PostDetail from './components/PostDetail'
 import LoginForm from './components/Auth/LoginForm'
 import AdminRouter from './components/admin/AdminRouter'
-import {getToken} from "./helpers/token-helper"
+import { getToken } from "./helpers/token-helper"
 
 const isAuthenticated = () => {
     return !!getToken();
@@ -29,12 +29,10 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                 <PrivateRoute path="/admin" component={AdminRouter} />
-
-                
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/page/:pageId" component={HomePage} />
-                <Route exact path="/login" component={LoginForm} />
-                <Route exact path="/:slug" component={PostDetail} />
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/page/:pageId" component={HomePage} />
+                    <Route exact path="/login" component={LoginForm} />
+                    <Route exact path="/:slug" component={PostDetail} />
                 </Switch>
             </BrowserRouter>
         )
