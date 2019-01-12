@@ -3,13 +3,15 @@ import {createConnection, getConnectionOptions} from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import config from './core/config/config.dev'
 
 import UserRoutes from "./routes/user.routes";
 import TermRoutes from "./routes/term.routes"
 import PostRoutes from "./routes/post.routes";
 import AttachmentRoutes from "./routes/attachment.routes";
-
 
 
 /**
