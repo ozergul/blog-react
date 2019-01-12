@@ -1,0 +1,1 @@
+Hi, I am a file uploaded to S3 resource using NodeJS :)

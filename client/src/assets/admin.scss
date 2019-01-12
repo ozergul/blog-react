@@ -1,0 +1,72 @@
+/* ADMIN */
+.admin {
+    .admin-row {
+        display: flex;
+        .admin-left {
+            width: 200px; height: 100vh; background: #23282D;
+        }
+
+        .admin-right {
+            width: 100%; padding: 20px;
+        }
+    }
+}
+
+.side-menu-list {
+    color: #fff; display: flex; flex-flow: column;
+    a {color: #fff; text-decoration: none;}
+
+    .inside {
+        overflow-y: auto;
+    }
+
+
+    .side-header {
+        padding: 5px 15px; border-bottom: 2px solid #191E23; display: flex; align-items: center;
+
+        .badge {margin-left: auto; color: #10AAEB !important; cursor: pointer;}
+    }
+
+    .item {
+        display: block; padding: 5px 15px; display: flex; align-items: center;
+        &:hover {background: #191E23; color: #10AAEB;}
+        .badge {margin-left: auto;}
+    }
+}
+
+
+.new-category-add-in-post {
+    .categories-list {
+        height: 280px; overflow-y: auto;
+    }
+}
+
+.admin-table-bold-link {font-weight: bold; text-decoration: none; color: #555;}
+
+.image-item {
+    position: relative; padding: 10px; border: 2px solid #eee;
+    .image-top {
+        display: flex; margin-bottom: 5px;
+    }
+    .remove-image-button {
+        margin-left: auto;
+    }
+}
+
+.upload-button-area {
+    display: flex; justify-content: center;
+    .upload-button {
+        font-size: 12px; margin-top: 5px;
+    }
+}
+
+.upload-finish-area {
+    .uploaded-input {
+        margin-top: 5px;
+    }
+}
+
+.attachment-table-list-item-image {
+    background-size: cover; height: 50px; width: 90px; display: block; background-position: center center;
+    background-repeat: no-repeat;
+}
