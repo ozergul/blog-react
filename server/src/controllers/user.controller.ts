@@ -2,12 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { User } from "../entity/user";
 import * as jwt from 'jsonwebtoken';
 
-import config from "../core/config/config.dev";
+import * as config from "../core/config/config.dev";
 
 export class UserController {
-    constructor() {
-
-    }
+    constructor() {}
+    
     public login = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let { email, password } = req.body.body;
