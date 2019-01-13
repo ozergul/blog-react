@@ -47,18 +47,18 @@ class PostDetail extends Component {
     render() {
         return (
             <Layout>
-                    {
-                        this.state.post &&
-                        <Helmet>
-                        <title>{`${this.state.post.title} | özer`}</title>
-                        <meta name="twitter:card" content="summary" />
-                        <meta name="twitter:description" content={`${this.state.post.content}`} />
-                        <meta name="twitter:title" content={`${this.state.post.title}`} />
-                        <meta name="twitter:site" contenst="@ozergul1" />
-                        <meta name="twitter:image" content="https://css-tricks.com/wp-content/uploads/2019/01/color-palette.png" />
-                        <meta name="twitter:creator" content="@ozergul1" />
-                        </Helmet>
-                    }
+                {
+                    this.state.post &&
+                    <Helmet>
+                    <title>{`${this.state.post.title} | özer`}</title>
+                    <meta name="twitter:card" content="summary" />
+                    <meta name="twitter:description" content={`${this.state.post.content}`} />
+                    <meta name="twitter:title" content={`${this.state.post.title}`} />
+                    <meta name="twitter:site" contenst="@ozergul1" />
+                    {/* <meta name="twitter:image" content="https://css-tricks.com/wp-content/uploads/2019/01/color-palette.png" /> */}
+                    <meta name="twitter:creator" content="@ozergul1" />
+                    </Helmet>
+                }
 
                 <div className="posts">
                     <div className="centered">

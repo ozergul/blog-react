@@ -158,6 +158,8 @@ footer {
 .post-tags {
     margin-top: 20px; border-top: 2px solid #efefef; padding-top: 20px; display: flex; justify-content: center;
     .tag-link {
+        border-bottom: 2px solid transparent;
         font-size: 15px; margin-right: 10px; margin-bottom: 10px; 
+        &:hover {border-bottom-color: #0001FF;}
     }
 }
