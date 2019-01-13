@@ -1,38 +1,44 @@
 import React, { Component } from 'react';
 import * as httpHelper from '../helpers/http-helper'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import moment from "moment";
 import "../assets/blog.scss";
 
-import hljs from 'highlight.js/lib/highlight';
-import 'highlight.js/styles/github.css'
+import Prism from "prismjs";
+import "prismjs/themes/prism.css";
+import Helmet from "react-helmet";
 
 class Posts extends Component {
 
     constructor() {
         super();
         this.state = {
-          posts : [],
-          postsCount: 0,
-          pages: 0
+            posts : [],
+            postsCount: 0,
+            pages: 0,
+            pageId: 1
         };
-
     }
 
-    componentDidMount() {
-        
-    }
+    componentDidMount() {}
+
+    componentDidUpdate = () => { window.scrollTo(0, 0) }
+
 
     async componentWillMount() {
+        
         let pageId = this.props.match.params.pageId;
         if(!pageId) pageId = 1;
+        this.setState({pageId: pageId})
         await this.getAllPosts(pageId);
+        
     }
 
     async componentWillReceiveProps(nextProps) {
         let pageId = nextProps.match.params.pageId;
         if(!pageId) pageId = 1;
+        this.setState({pageId: pageId})
         await this.getAllPosts(pageId);
     }
 
@@ -44,6 +50,7 @@ class Posts extends Component {
                 postsCount: response.data.count,
                 pages: Math.ceil(response.data.count/response.data.postPerPage)
             })
+            Prism.highlightAll();
         });
     }
 
@@ -51,6 +58,11 @@ class Posts extends Component {
     render() {
         return (
             <div className="posts">
+                <Helmet>
+                    {this.state.pageId != 1 &&
+                        <title>{`blog | özer | ${this.state.pageId}`}</title>
+                    }
+                </Helmet>
                 <div className="centered">
                 {
                     this.state.posts.map( (post, index) => 

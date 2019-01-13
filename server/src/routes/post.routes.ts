@@ -22,6 +22,7 @@ class PostRoutes {
 
         /* public routes */
         this.router.get('/public/posts/all/:pageId', this.PostController.publicAllWithPaginate);
+        this.router.get('/public/posts/single/:slug', this.PostController.publicSingle);
     }
 }
 

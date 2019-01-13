@@ -291,10 +291,10 @@ class PostFormClass extends Component {
                                     name="newCategory"
                                     onChange={(e)=> this.setState({newCategory: e.target.value})}
                                     />
-                                    <a className="btn btn-success ml-2" onClick={this.addNewCategory}>Add</a>
+                                    <button className="btn btn-success ml-2" onClick={this.addNewCategory}>Add</button>
                                 </div>
                             </div>
-
+                            
                             {/* SAVE/EDIT TIMES */}
                             {values.formType === "edit" && 
                             <div className="form-group">

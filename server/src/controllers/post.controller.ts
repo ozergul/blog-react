@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { Term } from "../entity/term";
 import { Post } from "../entity/post";
+import { PostMeta } from "../entity/postmeta";
 import * as helpers from "../utils/helpers";
-import * as showdown   from "showdown";
-const converter = new showdown.Converter(),
+import * as marked   from "marked";
 
 export class PostController {
     constructor() {}
@@ -379,7 +379,7 @@ export class PostController {
                 newPost.updatedAt = updatedAt;
                 newPost.slug = slug;
                 newPost.postType = postType;
-                newPost.content = converter.makeHtml(content);
+                newPost.content = marked(content);
 
                 newPost.categories = tempTerms.filter(t => t.type == "categories")
                 newPost.tags = tempTerms.filter(t => t.type == "tags")
@@ -393,4 +393,89 @@ export class PostController {
             res.json({success: false, message: "There was an error.."});
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /**
+     * Get single post by slug
+     */
+    public publicSingle = async (req: Request, res: Response, next: NextFunction) => {
+        let paramSlug = req.params.slug;
+      
+        try {
+            let post: any = await Post.findOne({
+                relations: ["terms"],
+                where: {
+                    status: 1,
+                    slug: paramSlug
+                }
+            });
+
+            let {id, title, content, createdAt, updatedAt, slug, postType} = post;
+            let tempTerms = post.terms;
+
+            let newPost:any = {}
+
+            newPost.id = id;
+            newPost.title = title;
+            newPost.createdAt = createdAt;
+            newPost.updatedAt = updatedAt;
+            newPost.slug = slug;
+            newPost.postType = postType;
+            newPost.content = marked(content);
+
+
+            newPost.categories = tempTerms.filter(t => t.type == "categories")
+            newPost.tags = tempTerms.filter(t => t.type == "tags")
+
+            res.json({post: newPost});
+        } catch(err) {
+            console.log(err)
+            res.json({success: false, message: "There was an error.."});
+        }
+    }
+
+
+    /**
+     * Get post meta
+     */
+    public getPostMeta = async(postId: any, metaKey: any) => {
+        let meta:any = await PostMeta.findOne({
+            where : {
+                postId: postId,
+                metaKey: metaKey
+            }
+        });
+
+        return meta;
+    }
+
+    /**
+     * Save post meta
+     */
+    public savePostMeta = async(postId: any, metaKey: any, metaValue: any) => {
+        let meta:PostMeta = await PostMeta.create({
+            postId: postId,
+            metaKey: metaKey,
+            metaValue: metaValue,
+        });
+
+        meta.save();
+
+        return meta;
+    }
+
 }
+

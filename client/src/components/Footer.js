@@ -4,7 +4,9 @@ class Footer extends Component {
     render() {
         return (
             <footer>
-               coded by ozer: github.
+                <div className="centered">
+                    coded by ozer. github: <a href="https://github.com/ozergul/blog-react">blog-react</a>
+                </div>
             </footer>
         )
     }
