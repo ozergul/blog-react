@@ -19,7 +19,7 @@ AWS_ACCESS=""
 AWS_REGION="us-east-2"
 AWS_BUCKET="my-bucket"
 ```
-* admin interface *
-![alt text](https://github.com/ozergul/blog-react/img/1.png)
-![alt text](https://github.com/ozergul/blog-react/img/2.png)
-![alt text](https://github.com/ozergul/blog-react/img/3.png)
+** admin interface **
+![](https://github.com/ozergul/blog-react/img/1.png)
+![](https://github.com/ozergul/blog-react/img/2.png)
+![](https://github.com/ozergul/blog-react/img/3.png)
