@@ -436,7 +436,6 @@ export class PostController {
             newPost.postType = postType;
             newPost.content = marked(content);
 
-
             newPost.categories = tempTerms.filter(t => t.type == "categories")
             newPost.tags = tempTerms.filter(t => t.type == "tags")
 
